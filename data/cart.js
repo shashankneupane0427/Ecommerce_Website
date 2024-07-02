@@ -39,6 +39,23 @@ export function addToCart(productId) {
       });
     }
 
+    let addedMessageTimeoutId;
+    const addedMessage = document.querySelector(
+      `.js-added-to-cart-${productId}`
+    );
+
+    addedMessage.classList.add('added-to-cart-visible');
+
+    if (addedMessageTimeoutId) {
+      clearTimeout(addedMessageTimeoutId);
+    }
+
+    const timeoutId = setTimeout(() => {
+      addedMessage.classList.remove('added-to-cart-visible');
+    }, 2000);
+
+    addedMessageTimeoutId = timeoutId;
+
 
     saveToStorage();
   }
@@ -55,4 +72,14 @@ export function addToCart(productId) {
     cart = newCart;
 
     saveToStorage();
+  }
+
+  export function calculateCartQuantity() {
+      let cartQuantity = 0;
+
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
+
+    return cartQuantity;
   }
