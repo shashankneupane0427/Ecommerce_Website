@@ -110,5 +110,7 @@ document.querySelectorAll('.js-add-to-cart')
         }, 2000);
 
         addedMessageTimeoutId = timeoutId;
+
+  
     });
   });
